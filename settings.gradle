@@ -1,2 +1,6 @@
 rootProject.name = 'buysaconsumergroup'
 
+include 'athena'
+include 'woocommerce'
+include 'metrics'
+

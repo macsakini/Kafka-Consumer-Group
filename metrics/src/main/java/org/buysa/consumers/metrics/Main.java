@@ -1,4 +1,4 @@
-package org.buysa.consumers.woocommerce;
+package org.buysa.consumers.metrics;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -12,7 +12,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 public class Main {
-    static public Logger logger = Logger.getLogger(org.buysa.consumers.athena.Main.class.getName());
+    static public Logger logger = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
         logger.info("Logger Initialized");
