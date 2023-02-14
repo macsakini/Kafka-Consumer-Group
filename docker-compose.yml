@@ -3,7 +3,7 @@ version: '3'
 services:
   athenaconsumer:
     build: 
-      context: .
+      context: athena/Dockerfile
     hostname: athenaconsumer
     restart: unless-stopped
     ports:
@@ -14,10 +14,12 @@ services:
       - ./local.properties:local.properties
       - ./private/client.truststore.jks:/private/client.truststore.jks
       - ./private/server.keystore.jks:/private/server.keystore.jks
+    command: "java -jar build/libs/athena-3.0.jar"
+
   
   wcconsumer:
     build: 
-      context: .
+      context: woocommerce/Dockerfile
     hostname: wcconsumer
     restart: unless-stopped
     ports:
@@ -28,10 +30,11 @@ services:
       - ./local.properties:local.properties
       - ./private/client.truststore.jks:/private/client.truststore.jks
       - ./private/server.keystore.jks:/private/server.keystore.jks
+    command: "java -jar build/libs/woocommerce-3.0.jar"
 
   metricsconsumer:
     build: 
-      context: .
+      context: metrics/Dockerfile
     hostname: metricsconsumer
     restart: unless-stopped
     ports:
@@ -42,6 +45,7 @@ services:
       - ./local.properties:local.properties
       - ./private/client.truststore.jks:/private/client.truststore.jks
       - ./private/server.keystore.jks:/private/server.keystore.jks
+    command: "java -jar build/libs/metrics-3.0.jar"
 
 volumes:
   athena:
