@@ -11,9 +11,9 @@ services:
     networks:
       - consumernet
     volumes:
-      - ./local.properties:local.properties
-      - ./private/client.truststore.jks:/private/client.truststore.jks
-      - ./private/server.keystore.jks:/private/server.keystore.jks
+      - ./local.properties:/src/main/resources/local.properties
+      - ./private/client.truststore.jks:/src/main/resources/private/client.truststore.jks
+      - ./private/server.keystore.jks:/src/main/resources/private/server.keystore.jks
     command: "java -jar build/libs/athena-3.0.jar"
 
   
@@ -27,9 +27,9 @@ services:
     networks:
       - consumernet
     volumes:
-      - ./local.properties:local.properties
-      - ./private/client.truststore.jks:/private/client.truststore.jks
-      - ./private/server.keystore.jks:/private/server.keystore.jks
+      - ./local.properties:/src/main/resources/local.properties
+      - ./private/client.truststore.jks:/src/main/resources/private/client.truststore.jks
+      - ./private/server.keystore.jks:/src/main/resources/private/server.keystore.jks
     command: "java -jar build/libs/woocommerce-3.0.jar"
 
   metricsconsumer:
@@ -42,9 +42,9 @@ services:
     networks:
       - consumernet
     volumes:
-      - ./local.properties:local.properties
-      - ./private/client.truststore.jks:/private/client.truststore.jks
-      - ./private/server.keystore.jks:/private/server.keystore.jks
+      - ./local.properties:/src/main/resources/local.properties
+      - ./private/client.truststore.jks:/src/main/resources/private/client.truststore.jks
+      - ./private/server.keystore.jks:/src/main/resources/private/server.keystore.jks
     command: "java -jar build/libs/metrics-3.0.jar"
 
 volumes:
