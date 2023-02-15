@@ -18,7 +18,7 @@ public class Main {
         logger.info("Logger Initialized");
 
         List<String> topics = new ArrayList<>();
-        topics.add("items");
+        topics.add("wc");
 
         Properties properties = new Properties();
         properties.setProperty(ConsumerConfig.CLIENT_ID_CONFIG, "Athena Consumer");

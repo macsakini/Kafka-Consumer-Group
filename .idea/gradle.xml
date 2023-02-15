@@ -9,6 +9,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/athena" />
+            <option value="$PROJECT_DIR$/metrics" />
+            <option value="$PROJECT_DIR$/woocommerce" />
           </set>
         </option>
       </GradleProjectSettings>

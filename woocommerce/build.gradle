@@ -1,5 +1,4 @@
 plugins {
-    id 'java'
     id 'application'
 }
 
@@ -8,31 +7,19 @@ application {
 }
 
 jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
     manifest {
         attributes 'Main-Class': 'org.buysa.consumers.woocommerce.Main'
+    }
+    from {
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
 group 'org.buysa.consumers'
 
 version '3.0'
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    implementation 'org.apache.kafka:kafka-clients:3.4.0'
-    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.406'
-    implementation files("src/main/resources")
-}
-
-test {
-    useJUnitPlatform()
-
-}
 
 task infoWoocommerce(){
     description = "This informs the user that the build for Woocommerce project has started"
@@ -41,10 +28,3 @@ task infoWoocommerce(){
     }
 }
 
-task buildWC(type: Jar) {
-    from compileJava
-    from processResources
-    into('lib') {
-        from configurations.runtimeClasspath
-    }
-}
