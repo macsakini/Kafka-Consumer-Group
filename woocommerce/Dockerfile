@@ -1,4 +1,4 @@
-FROM amazoncorretto:11-alpine3.16
+FROM gradle:7.6.0-jdk11-alpine
 
 COPY build.gradle .
 
