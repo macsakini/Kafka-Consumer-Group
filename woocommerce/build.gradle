@@ -7,6 +7,11 @@ application {
     mainClass = 'org.buysa.consumers.woocommerce.Main'
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.buysa.consumers.woocommerce.Main'
+    }
+}
 
 group 'org.buysa.consumers'
 
@@ -29,6 +34,12 @@ test {
 
 }
 
+task infoWoocommerce(){
+    description = "This informs the user that the build for Woocommerce project has started"
+    doFirst(){
+        println "Build Woocommerce Started"
+    }
+}
 
 task buildWC(type: Jar) {
     from compileJava

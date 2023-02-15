@@ -7,6 +7,11 @@ application {
     mainClass = 'org.buysa.consumers.metrics.Main'
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.buysa.consumers.metrics.Main'
+    }
+}
 
 group 'org.buysa.consumers'
 
@@ -27,6 +32,13 @@ dependencies {
 test {
     useJUnitPlatform()
 
+}
+
+task infoMetrics(){
+    description = "This informs the user that the build for metrics project has started"
+    doFirst {
+        println "Build Metrics Started"
+    }
 }
 
 

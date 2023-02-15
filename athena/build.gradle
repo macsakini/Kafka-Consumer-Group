@@ -2,6 +2,15 @@ plugins {
     id 'java'
     id 'application'
 }
+application {
+    mainClass = 'org.buysa.consumers.athena.Main'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.buysa.consumers.athena.Main'
+    }
+}
 
 group 'org.buysa.consumers'
 
@@ -19,8 +28,11 @@ dependencies {
     implementation files("src/main/resources")
 }
 
-application {
-    mainClass = 'org.buysa.consumers.athena.Main'
+task infoAthena(){
+    description = "This informs the user that the build for athena project has started"
+    doFirst(){
+        println "Build Athena Started"
+    }
 }
 
 task buildAthena(type: Jar) {

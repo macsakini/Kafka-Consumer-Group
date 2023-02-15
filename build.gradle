@@ -1,0 +1,24 @@
+// Apply the Java plugin to all subprojects
+allprojects {
+    apply plugin: 'java'
+}
+group 'org.buysa.consumers'
+
+version '3.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'org.apache.kafka:kafka-clients:3.4.0'
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.406'
+    implementation files("src/main/resources")
+}
+
+test {
+    useJUnitPlatform()
+}
+
