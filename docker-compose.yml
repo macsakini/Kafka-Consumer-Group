@@ -3,7 +3,7 @@ version: '3'
 services:
   athenaconsumer:
     build: 
-      context: athena/Dockerfile
+      context: athena/.
     hostname: athenaconsumer
     restart: unless-stopped
     ports:
@@ -19,7 +19,7 @@ services:
   
   wcconsumer:
     build: 
-      context: woocommerce/Dockerfile
+      context: woocommerce/.
     hostname: wcconsumer
     restart: unless-stopped
     ports:
@@ -34,7 +34,7 @@ services:
 
   metricsconsumer:
     build: 
-      context: metrics/Dockerfile
+      context: metrics/.
     hostname: metricsconsumer
     restart: unless-stopped
     ports:

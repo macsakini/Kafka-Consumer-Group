@@ -4,4 +4,4 @@ COPY build.gradle .
 
 COPY src src
 
-RUN ./gradlew build
+RUN gradle build
