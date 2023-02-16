@@ -6,6 +6,10 @@ application {
     mainClass = 'org.buysa.consumers.athena.Main'
 }
 
+group 'org.buysa.consumers'
+
+version '3.0'
+
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
@@ -16,11 +20,6 @@ jar {
         configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
-
-group 'org.buysa.consumers'
-
-version '3.0'
-
 
 task infoAthena(){
     description = "This informs the user that the build for athena project has started"

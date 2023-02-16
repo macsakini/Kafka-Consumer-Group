@@ -6,6 +6,9 @@ application {
     mainClass = 'org.buysa.consumers.metrics.Main'
 }
 
+group 'org.buysa.consumers'
+
+version '3.0'
 
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -16,10 +19,6 @@ jar {
         configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
-
-group 'org.buysa.consumers'
-
-version '3.0'
 
 task infoMetrics(){
     description = "This informs the user that the build for metrics project has started"
