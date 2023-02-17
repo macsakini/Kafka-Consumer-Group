@@ -25,7 +25,7 @@ public class Main {
         List<String> topics = new ArrayList<>();
         topics.add("athena");
 
-        System.out.println("My Name is Max");
+        System.out.println("My Name is Maxwell");
 
         Properties properties = new Properties();
         properties.setProperty(ConsumerConfig.CLIENT_ID_CONFIG, "Athena Consumer");
