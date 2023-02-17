@@ -25,6 +25,8 @@ public class Main {
         List<String> topics = new ArrayList<>();
         topics.add("athena");
 
+        System.out.println("My Name is Max");
+
         Properties properties = new Properties();
         properties.setProperty(ConsumerConfig.CLIENT_ID_CONFIG, "Athena Consumer");
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "13.246.19.88:9093");
