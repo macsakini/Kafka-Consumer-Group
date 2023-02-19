@@ -1,14 +1,10 @@
-Feb 19, 2023 10:15:18 PM org.buysa.consumers.woocommerce.Main main
+Feb 20, 2023 1:07:30 AM org.buysa.consumers.metrics.Main main
 INFO: Logger Initialized
-Feb 19, 2023 10:15:18 PM org.buysa.consumers.athena.Main main
-INFO: Logger Initialized
-Feb 19, 2023 10:15:18 PM org.buysa.consumers.metrics.Main main
-INFO: Logger Initialized
-Feb 19, 2023 10:15:18 PM org.buysa.consumers.athena.Main main
+Feb 20, 2023 1:07:30 AM org.buysa.consumers.metrics.Main main
 INFO: DEV
-Feb 19, 2023 10:15:18 PM org.buysa.consumers.metrics.Main main
-INFO: DEV
-Feb 19, 2023 10:15:18 PM org.buysa.consumers.woocommerce.Main main
+Feb 20, 2023 1:07:30 AM org.buysa.consumers.athena.Main main
+INFO: Logger Initialized
+Feb 20, 2023 1:07:30 AM org.buysa.consumers.athena.Main main
 INFO: DEV
 SLF4J: No SLF4J providers were found.
 SLF4J: Defaulting to no-operation (NOP) logger implementation
@@ -16,6 +12,10 @@ SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
 SLF4J: No SLF4J providers were found.
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+Feb 20, 2023 1:07:30 AM org.buysa.consumers.woocommerce.Main main
+INFO: Logger Initialized
+Feb 20, 2023 1:07:30 AM org.buysa.consumers.woocommerce.Main main
+INFO: DEV
 SLF4J: No SLF4J providers were found.
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.

@@ -16,10 +16,6 @@ jar {
     }
 }
 
-dependencies {
-//    implementation files("local.properties")
-    implementation files("src/main/resources")
-}
 
 task infoAthena(){
     description = "This informs the user that the build for athena project has started"
