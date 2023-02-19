@@ -5,7 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54577bd6-8f71-49ed-ad02-55da9c4d192a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/athena/src/main/resources/local.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/src/main/resources/local.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/woocommerce/src/main/resources/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/athena/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/athena/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/athena/src/main/java/org/buysa/consumers/athena/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/athena/src/main/java/org/buysa/consumers/athena/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/athena/src/main/java/org/buysa/consumers/athena/s3Athena.java" beforeDir="false" afterPath="$PROJECT_DIR$/athena/src/main/java/org/buysa/consumers/athena/s3Athena.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/metrics/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metrics/src/main/java/org/buysa/consumers/metrics/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/src/main/java/org/buysa/consumers/metrics/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nohup.out" beforeDir="false" afterPath="$PROJECT_DIR$/nohup.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/private/client.truststore.jks" beforeDir="false" afterPath="$PROJECT_DIR$/athena/src/main/resources/private/client.truststore.jks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/private/server.keystore.jks" beforeDir="false" afterPath="$PROJECT_DIR$/athena/src/main/resources/private/server.keystore.jks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/woocommerce/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/woocommerce/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/woocommerce/src/main/java/org/buysa/consumers/woocommerce/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/woocommerce/src/main/java/org/buysa/consumers/woocommerce/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +41,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/.aws/config" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/athena/build.gradle" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/athena/src/main/java/org/buysa/consumers/athena/Main.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/athena/src/main/resources/local.properties" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/settings.gradle" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -48,40 +70,34 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/private" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/athena/src/main/resources" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/athena" />
+      <recent name="$PROJECT_DIR$/athena/src" />
+      <recent name="$PROJECT_DIR$/athena/src/main/resources/private" />
+    </key>
   </component>
-  <component name="RunManager" selected="Gradle.buysaconsumergroup [dependencies]">
-    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Gradle.buysaconsumergroup [jar]">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.buysa.consumers.metrics.Main" />
+      <module name="buysaconsumergroup.metrics.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.buysa.consumers.metrics.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="org.buysa.consumers.woocommerce.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.buysa.consumers.woocommerce.Main" />
       <module name="buysaconsumergroup.woocommerce.main" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.buysa.consumers.woocommerce.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.buysa.consumers.woocommerce.Main" />
-      <module name="buysaconsumergroup.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.buysa.consumers.woocommerce.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="s3Athena" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.buysa.consumers.athena.s3Athena" />
-      <module name="buysaconsumergroup.athena.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.buysa.consumers.athena.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -110,12 +126,55 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="buysaconsumergroup [infoAthena]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="infoAthena" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="buysaconsumergroup [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.buysaconsumergroup [dependencies]" />
-        <item itemvalue="Application.s3Athena" />
-        <item itemvalue="Application.Main (1)" />
+        <item itemvalue="Gradle.buysaconsumergroup [jar]" />
+        <item itemvalue="Application.org.buysa.consumers.woocommerce.Main" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Gradle.buysaconsumergroup [dependencies]" />
+        <item itemvalue="Gradle.buysaconsumergroup [infoAthena]" />
       </list>
     </recent_temporary>
   </component>

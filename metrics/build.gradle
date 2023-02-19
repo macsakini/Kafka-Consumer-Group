@@ -6,10 +6,6 @@ application {
     mainClass = 'org.buysa.consumers.metrics.Main'
 }
 
-group 'org.buysa.consumers'
-
-version '3.0'
-
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
@@ -20,11 +16,15 @@ jar {
     }
 }
 
-task infoMetrics(){
-    description = "This informs the user that the build for metrics project has started"
-    doFirst {
-        println "Build Metrics Started"
-    }
+dependencies {
+//    implementation files("local.properties")
+    implementation files("src/main/resources")
 }
 
+task infoAthena(){
+    description = "This informs the user that the build for athena project has started"
+    doFirst(){
+        println "Build Athena Started"
+    }
+}
 

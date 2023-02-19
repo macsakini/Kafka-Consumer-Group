@@ -14,12 +14,8 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 public class s3Athena {
     String bucket_name = "buysa";
     String file_path = "/items";
-
     private static S3Client s3;
     s3Athena(){
-//        AWSCredentials credentials = new BasicAWSCredentials(
-//                "YourAccessKeyID",
-//                "YourSecretAccessKey");
 
     }
     public String send(String key, String value) throws IOException {

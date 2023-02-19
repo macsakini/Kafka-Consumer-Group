@@ -1,53 +1,15 @@
-Feb 15, 2023 4:39:42 PM org.buysa.consumers.metrics.Main main
+Feb 19, 2023 10:15:18 PM org.buysa.consumers.woocommerce.Main main
 INFO: Logger Initialized
-Feb 15, 2023 4:39:43 PM org.buysa.consumers.athena.Main main
+Feb 19, 2023 10:15:18 PM org.buysa.consumers.athena.Main main
 INFO: Logger Initialized
-SLF4J: No SLF4J providers were found.
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
-Feb 15, 2023 4:39:42 PM org.buysa.consumers.woocommerce.Main main
+Feb 19, 2023 10:15:18 PM org.buysa.consumers.metrics.Main main
 INFO: Logger Initialized
-SLF4J: No SLF4J providers were found.
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
-SLF4J: No SLF4J providers were found.
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
-Feb 15, 2023 4:40:37 PM org.buysa.consumers.metrics.Main main
-INFO: Key: 7890, Value:Cows Win
-Feb 15, 2023 4:40:37 PM org.buysa.consumers.metrics.Main main
-INFO: Partition:0,Offset:5
-Feb 15, 2023 4:40:51 PM org.buysa.consumers.woocommerce.Main main
-INFO: Key: 7890, Value:Cows Win
-Feb 15, 2023 4:40:51 PM org.buysa.consumers.woocommerce.Main main
-INFO: Partition:0,Offset:1
-Feb 15, 2023 4:41:14 PM org.buysa.consumers.athena.Main main
-INFO: Key: 7890, Value:Athena
-Feb 15, 2023 4:41:14 PM org.buysa.consumers.athena.Main main
-INFO: Partition:0,Offset:0
-The af-south-1 location constraint is incompatible for the region specific endpoint this request was sent to.
-Feb 15, 2023 4:41:53 PM org.buysa.consumers.metrics.Main main
-INFO: Key: 7890, Value:Metrics
-Feb 15, 2023 4:41:53 PM org.buysa.consumers.metrics.Main main
-INFO: Partition:0,Offset:6
-Feb 15, 2023 4:42:10 PM org.buysa.consumers.woocommerce.Main main
-INFO: Key: 7890, Value:WC
-Feb 15, 2023 4:42:10 PM org.buysa.consumers.woocommerce.Main main
-INFO: Partition:0,Offset:2
-Feb 15, 2023 4:43:16 PM org.buysa.consumers.metrics.Main main
-INFO: Key: 7890, Value:Metrics
-Feb 15, 2023 4:43:16 PM org.buysa.consumers.metrics.Main main
-INFO: Partition:0,Offset:7
-Feb 15, 2023 4:43:36 PM org.buysa.consumers.woocommerce.Main main
-INFO: Key: 7890, Value:WC
-Feb 15, 2023 4:43:36 PM org.buysa.consumers.woocommerce.Main main
-INFO: Partition:0,Offset:3
-Feb 15, 2023 4:44:42 PM org.buysa.consumers.metrics.Main main
-INFO: Logger Initialized
-Feb 15, 2023 4:44:42 PM org.buysa.consumers.woocommerce.Main main
-INFO: Logger Initialized
-Feb 15, 2023 4:44:42 PM org.buysa.consumers.athena.Main main
-INFO: Logger Initialized
+Feb 19, 2023 10:15:18 PM org.buysa.consumers.athena.Main main
+INFO: DEV
+Feb 19, 2023 10:15:18 PM org.buysa.consumers.metrics.Main main
+INFO: DEV
+Feb 19, 2023 10:15:18 PM org.buysa.consumers.woocommerce.Main main
+INFO: DEV
 SLF4J: No SLF4J providers were found.
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
@@ -57,43 +19,3 @@ SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
 SLF4J: No SLF4J providers were found.
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
-Feb 15, 2023 4:45:03 PM org.buysa.consumers.athena.Main main
-INFO: Key: 7890, Value:Athena
-Feb 15, 2023 4:45:03 PM org.buysa.consumers.athena.Main main
-INFO: Partition:0,Offset:0
-The af-south-1 location constraint is incompatible for the region specific endpoint this request was sent to.
-Feb 15, 2023 4:45:58 PM org.buysa.consumers.athena.Main main
-INFO: Logger Initialized
-Feb 15, 2023 4:45:58 PM org.buysa.consumers.metrics.Main main
-INFO: Logger Initialized
-SLF4J: No SLF4J providers were found.
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
-SLF4J: No SLF4J providers were found.
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
-Feb 15, 2023 4:45:58 PM org.buysa.consumers.woocommerce.Main main
-INFO: Logger Initialized
-SLF4J: No SLF4J providers were found.
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
-Feb 15, 2023 4:46:42 PM org.buysa.consumers.athena.Main main
-INFO: Key: 7890, Value:Athena
-Feb 15, 2023 4:46:42 PM org.buysa.consumers.athena.Main main
-INFO: Partition:0,Offset:0
-Feb 15, 2023 4:46:42 PM org.buysa.consumers.athena.Main main
-INFO: Key: 7890, Value:Athena
-Feb 15, 2023 4:46:42 PM org.buysa.consumers.athena.Main main
-INFO: Partition:0,Offset:1
-Feb 15, 2023 4:46:42 PM org.buysa.consumers.athena.Main main
-INFO: Key: 7890, Value:YEEHE
-Feb 15, 2023 4:46:42 PM org.buysa.consumers.athena.Main main
-INFO: Partition:0,Offset:2
-Feb 15, 2023 4:46:42 PM org.buysa.consumers.athena.Main main
-INFO: Key: 7890, Value:YEEHE
-Feb 15, 2023 4:46:42 PM org.buysa.consumers.athena.Main main
-INFO: Partition:0,Offset:3
-Feb 15, 2023 4:47:02 PM org.buysa.consumers.athena.Main main
-INFO: Key: 7890, Value:YEEHE
-Feb 15, 2023 4:47:02 PM org.buysa.consumers.athena.Main main
-INFO: Partition:0,Offset:4

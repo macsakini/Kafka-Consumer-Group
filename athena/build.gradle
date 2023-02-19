@@ -6,19 +6,19 @@ application {
     mainClass = 'org.buysa.consumers.athena.Main'
 }
 
-group 'org.buysa.consumers'
-
-version '3.0'
-
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
     manifest {
         attributes 'Main-Class': 'org.buysa.consumers.athena.Main'
     }
     from {
         configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
+}
+
+dependencies {
+//    implementation files("local.properties")
+    implementation files("src/main/resources")
 }
 
 task infoAthena(){
