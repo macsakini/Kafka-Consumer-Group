@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54577bd6-8f71-49ed-ad02-55da9c4d192a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/woocommerce/src/main/java/org/buysa/consumers/woocommerce/WC/ProductObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/woocommerce/src/main/java/org/buysa/consumers/woocommerce/WC/Products.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/woocommerce/src/main/java/org/buysa/consumers/woocommerce/WC/ProductsInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/woocommerce/src/main/java/org/buysa/consumers/woocommerce/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/woocommerce/src/main/java/org/buysa/consumers/woocommerce/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/woocommerce/src/main/resources/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/woocommerce/src/main/resources/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
