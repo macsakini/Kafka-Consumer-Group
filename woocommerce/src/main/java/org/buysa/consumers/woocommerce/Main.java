@@ -16,6 +16,8 @@ import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.errors.OffsetOutOfRangeException;
 import org.apache.kafka.common.errors.WakeupException;
 import org.apache.kafka.common.errors.SslAuthenticationException;
+import org.buysa.consumers.woocommerce.WC.Products;
+import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,7 +27,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 public class Main {
-    private final static String Topic = "athena";
+    private final static String Topic = "processeditems";
     static public Logger logger = Logger.getLogger(org.buysa.consumers.woocommerce.Main.class.getName());
     public static void main(String[] args) throws IOException {
         logger.info("Logger Initialized");
@@ -69,6 +71,9 @@ public class Main {
                 for (ConsumerRecord<String, String> record : records) {
                     logger.info("Key: " + record.key() + ", Value:" + record.value());
                     logger.info("Partition:" + record.partition() + ",Offset:" + record.offset());
+                    JSONObject toBuysa = new JSONObject(record.value());
+                    Products<JSONObject> product = new Products<JSONObject>(toBuysa);
+                    product.create();
                 }
             }
         } catch (WakeupException e) {
