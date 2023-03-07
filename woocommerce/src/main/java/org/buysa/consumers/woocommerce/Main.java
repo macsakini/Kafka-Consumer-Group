@@ -1,6 +1,36 @@
 package org.buysa.consumers.woocommerce;
 
 // Libraries to be used
+import org.apache.hc.client5.http.async.methods.SimpleHttpRequest;
+import org.apache.hc.client5.http.async.methods.SimpleHttpResponse;
+import org.apache.hc.client5.http.async.methods.SimpleRequestBuilder;
+import org.apache.hc.client5.http.auth.AuthScope;
+import org.apache.hc.client5.http.auth.Credentials;
+import org.apache.hc.client5.http.auth.CredentialsProvider;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.entity.UrlEncodedFormEntity;
+import org.apache.hc.client5.http.impl.async.CloseableHttpAsyncClient;
+import org.apache.hc.client5.http.impl.async.HttpAsyncClients;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.concurrent.FutureCallback;
+import org.apache.hc.core5.http.*;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.apache.hc.core5.http.io.support.ClassicRequestBuilder;
+import org.apache.hc.core5.http.message.BasicNameValuePair;
+import org.apache.hc.core5.http.protocol.HttpContext;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.time.Duration;
+import java.util.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Future;
+import java.util.logging.Logger;
+
 import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -9,26 +39,11 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.config.SslConfigs;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
-// Error handling
-import org.apache.kafka.common.KafkaException;
-import org.apache.kafka.common.errors.TimeoutException;
-import org.apache.kafka.common.errors.SerializationException;
-import org.apache.kafka.common.errors.OffsetOutOfRangeException;
-import org.apache.kafka.common.errors.WakeupException;
-import org.apache.kafka.common.errors.SslAuthenticationException;
-import org.buysa.consumers.woocommerce.WC.Products;
-import org.json.JSONObject;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.time.Duration;
-import java.util.*;
-import java.util.logging.Logger;
 
 public class Main {
-    private final static String Topic = "processeditems";
+    private final static String Topic = "items";
     static public Logger logger = Logger.getLogger(org.buysa.consumers.woocommerce.Main.class.getName());
+    static Redis redis = new Redis();
     public static void main(String[] args) throws IOException {
         logger.info("Logger Initialized");
 
@@ -62,6 +77,7 @@ public class Main {
         properties.setProperty(SslConfigs.SSL_ENDPOINT_IDENTIFICATION_ALGORITHM_CONFIG, "");
 
 
+
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
 
         try (consumer) {
@@ -69,27 +85,167 @@ public class Main {
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
                 for (ConsumerRecord<String, String> record : records) {
-                    logger.info("Key: " + record.key() + ", Value:" + record.value());
-                    logger.info("Partition:" + record.partition() + ",Offset:" + record.offset());
-                    JSONObject toBuysa = new JSONObject(record.value());
-                    Products<JSONObject> product = new Products<JSONObject>(toBuysa);
-                    product.create();
+//                    logger.info("Key: " + record.key() + ", Value:" + record.value());
+                    if(redis.checkProduct(record.key())){
+                        String product_id = redis.getProduct(record.key());
+                        JSONObject body = handleVariant(record.key(), record.value());
+                        System.out.println(body);
+                        try (CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault()) {
+                            // Start the client
+                            httpclient.start();
+                            // One most likely would want to use a callback for operation result
+                            CountDownLatch latch = new CountDownLatch(1);
+                            SimpleHttpRequest request = SimpleRequestBuilder
+                                    .post("https://www.buysa.co.zw/wp-json/wc/v3/products/"+product_id+"/variations")
+                                    .setHeader(HttpHeaders.AUTHORIZATION, "Basic Y2tfMmU5OTVjNmU2Yzc2OWE3ODg1YjZjNTdmMTBmOGIwMzNlYTg0NmRiMTpjc185NmVkNzAwZTYwNmFjNTQ5ZDZkODQzMTIxY2RhOTg1NjUxOGE4OTYy")
+                                    .setBody(String.valueOf(body), ContentType.APPLICATION_JSON)
+                                    .build();
+                            httpclient.execute(request, new FutureCallback<SimpleHttpResponse>() {
+                                @Override
+                                public void completed(SimpleHttpResponse response) {
+                                    latch.countDown();
+                                    System.out.println(request.getRequestUri() + "->" + response.getCode());
+                                    JSONObject resp = new JSONObject(response.getBody().getBodyText());
+                                    if(response.getCode() == 200 | response.getCode() == 201){
+                                        redis.registerProduct(record.key(), String.valueOf(resp.getInt("id")));
+                                    }
+                                    System.out.println(resp);
+                                }
+                                @Override
+                                public void failed(Exception ex) {
+                                    latch.countDown();
+                                    System.out.println(request.getRequestUri() + "->" + ex);
+                                }
+                                @Override
+                                public void cancelled() {
+                                    latch.countDown();
+                                    System.out.println(request.getRequestUri() + " cancelled");
+                                }
+
+                            });
+                            latch.await();
+                            httpclient.close();
+                        }
+                    }else{
+                        JSONObject body = handleProduct(record.key(), record.value());
+                        System.out.println(body);
+                        try (CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault()) {
+                            // Start the client
+                            httpclient.start();
+                            // One most likely would want to use a callback for operation result
+                            CountDownLatch latch = new CountDownLatch(1);
+                            SimpleHttpRequest request = SimpleRequestBuilder
+                                    .post("https://www.buysa.co.zw/wp-json/wc/v3/products")
+                                    .setHeader(HttpHeaders.AUTHORIZATION, "Basic Y2tfMmU5OTVjNmU2Yzc2OWE3ODg1YjZjNTdmMTBmOGIwMzNlYTg0NmRiMTpjc185NmVkNzAwZTYwNmFjNTQ5ZDZkODQzMTIxY2RhOTg1NjUxOGE4OTYy")
+                                    .setBody(String.valueOf(body),ContentType.APPLICATION_JSON)
+                                    .build();
+                            httpclient.execute(request, new FutureCallback<SimpleHttpResponse>() {
+                                @Override
+                                public void completed(SimpleHttpResponse response) {
+                                    latch.countDown();
+                                    System.out.println(request.getRequestUri() + "->" + response.getCode());
+                                    JSONObject resp = new JSONObject(response.getBody().getBodyText());
+                                    if(response.getCode() == 200 | response.getCode() == 201){
+                                        redis.registerProduct(record.key(), String.valueOf(resp.getInt("id")));
+                                    }
+                                }
+                                @Override
+                                public void failed(Exception ex) {
+                                    latch.countDown();
+                                    System.out.println(request.getRequestUri() + "->" + ex);
+                                }
+                                @Override
+                                public void cancelled() {
+                                    latch.countDown();
+                                    System.out.println(request.getRequestUri() + " cancelled");
+                                }
+                            });
+                            latch.await();
+                            httpclient.close();
+                        }
+                    }
                 }
             }
-        } catch (WakeupException e) {
-            logger.warning("Consumer did not wake up");
-        } catch (SslAuthenticationException e) {
-            logger.warning("Authorization did not succeed" + e);
-        } catch (TimeoutException e) {
-            logger.warning("Fix");
-        } catch (SerializationException e) {
-            logger.warning("Fixify" + e);
-        } catch (OffsetOutOfRangeException e) {
-            logger.warning("Fixify 2");
-        } catch (KafkaException e) {
-            logger.warning("Proper");
         } catch (Exception e) {
-            logger.warning("Fixify 3");
+            logger.warning("The Consumer Encountered an error please attend to it");
+            e.printStackTrace();
         }
     }
+
+
+    public static JSONObject handleVariant(String key, String value){
+        JSONObject product = new JSONObject(value);
+        int plid = product.getInt("plid");
+//        int product_id = product.getInt("product_id");
+        String name = product.getString("title");
+        String type = product.getString("type");
+        int regular_price = product.getInt("price");
+        String description = product.getString("description");
+//        String product_info = product.getString("product_info");
+//        JSONArray images = product.getJSONArray("images");
+
+
+        JSONObject attributes = new JSONObject();
+        attributes.put("id", 8);
+        attributes.put("option", "Black");
+
+        JSONObject product_fin = new JSONObject();
+        product_fin.put("regular_price", Integer.toString(regular_price));
+        product_fin.put("description", description);
+        product_fin.put("attributes", new JSONArray().put(attributes));
+//        product_fin.put("images", images);
+//        product_fin.put("sku", Integer.toString(plid+product_id));
+        return product_fin;
+
+    }
+
+    public static JSONObject handleProduct(String key, String value) throws IOException {
+        System.out.println(value);
+        JSONObject product = new JSONObject(value);
+        int plid = product.getInt("plid");
+        String name = product.getString("title");
+        String type = product.getString("type");
+        int regular_price = product.getInt("price");
+        String description = product.getString("description");
+//        JSONObject product_info = product.getJSONObject("product_info");
+//        try{
+//            JSONArray images = product.getJSONArray("images");
+//        }catch(JSONException e){
+//            JSONArray images = new JSONArray("ks");
+//        }
+
+
+        JSONObject product_fin = new JSONObject();
+        product_fin.put("name", name);
+        product_fin.put("type", "variable");
+        product_fin.put("regular_price", Integer.toString(regular_price));
+        product_fin.put("description", description);
+//        product_fin.put("images", images);
+//        product_fin.put("sku", Integer.toString(plid));
+        return product_fin;
+    }
+
 }
+
+
+
+//import org.apache.kafka.common.KafkaException;
+//import org.apache.kafka.common.errors.TimeoutException;
+//import org.apache.kafka.common.errors.SerializationException;
+//import org.apache.kafka.common.errors.OffsetOutOfRangeException;
+//import org.apache.kafka.common.errors.WakeupException;
+//import org.apache.kafka.common.errors.SslAuthenticationException;
+
+
+//} catch (WakeupException e) {
+//    logger.warning("Consumer did not wake up");
+//    } catch (SslAuthenticationException e) {
+//    logger.warning("Authorization did not succeed" + e);
+//    } catch (TimeoutException e) {
+//    logger.warning("Fix");
+//    } catch (SerializationException e) {
+//    logger.warning("Fixify" + e);
+//    } catch (OffsetOutOfRangeException e) {
+//    logger.warning("Fixify 2");
+//    } catch (KafkaException e) {
+//    logger.warning("Proper");

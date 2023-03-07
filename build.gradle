@@ -17,6 +17,8 @@ allprojects {
         implementation 'org.slf4j:slf4j-api:2.0.6'
         implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
         implementation 'org.json:json:20220924'
+        // https://mvnrepository.com/artifact/redis.clients/jedis
+        implementation 'redis.clients:jedis:4.4.0-m1'
     }
 
     test {

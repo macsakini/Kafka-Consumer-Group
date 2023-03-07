@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54577bd6-8f71-49ed-ad02-55da9c4d192a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/woocommerce/src/main/java/org/buysa/consumers/woocommerce/Redis.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/woocommerce/src/main/java/org/buysa/consumers/woocommerce/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/woocommerce/src/main/java/org/buysa/consumers/woocommerce/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/woocommerce/src/main/java/org/buysa/consumers/woocommerce/WC/ProductObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/woocommerce/src/main/java/org/buysa/consumers/woocommerce/WC/Products.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/woocommerce/src/main/java/org/buysa/consumers/woocommerce/WC/ProductsInterface.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,6 +151,15 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <option name="AUTO_RESTART" value="false" />
       <method v="2" />
     </configuration>
     <recent_temporary>
