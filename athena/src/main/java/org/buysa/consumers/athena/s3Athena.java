@@ -1,7 +1,9 @@
 package org.buysa.consumers.athena;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.util.Properties;
 import java.util.Random;
 
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -15,15 +17,18 @@ public class s3Athena {
     String bucket_name = "buysa";
     String file_path = "/items";
     private static S3Client s3;
-    s3Athena(){
-
-    }
-    public String send(String key, String value) throws IOException {
+    public s3Athena(){}
+    public void send(String key, String value) throws IOException {
+        Properties localproperties = new Properties();
+        try (InputStream propertiesfile = ClassLoader.getSystemResourceAsStream("local.properties");) {
+            localproperties.load(propertiesfile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         AwsBasicCredentials awsCreds = AwsBasicCredentials.create(
-                "AKIA6AFBSQO3ZBBG4BO4",
-                "G+JEo0QIadLkG9Qy5H6xTIJlJGtIWoYT5DqQM8Lk"
+                localproperties.getProperty("AWS_ACCESS_KEY"),
+                localproperties.getProperty("AWS_ACCESS_SECRET")
         );
-
 
         s3 = S3Client.builder()
                 .region(Region.AF_SOUTH_1)
@@ -37,7 +42,6 @@ public class s3Athena {
 
         s3.putObject(objectRequest, RequestBody.fromByteBuffer(getRandomByteBuffer(10_000)));
 
-        return "successful";
     }
 
     private static ByteBuffer getRandomByteBuffer(int size) throws IOException {

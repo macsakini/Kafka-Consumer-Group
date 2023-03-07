@@ -71,7 +71,7 @@ public class Main {
         properties.setProperty(SslConfigs.SSL_KEY_PASSWORD_CONFIG, localproperties.getProperty("SSL_PASSWORD"));
         properties.setProperty(SslConfigs.SSL_ENDPOINT_IDENTIFICATION_ALGORITHM_CONFIG, "");
 
-        AuthScope scope = new AuthScope("https://www.buysa.co.zw/wp-json/wc/v3/products/", 80);
+        AuthScope scope = new AuthScope("https://www.buysa.co.zw", 80);
         BasicCredentialsProvider creds = new BasicCredentialsProvider();
         creds.setCredentials(
                 scope, new UsernamePasswordCredentials(
@@ -90,7 +90,11 @@ public class Main {
                         String product_id = redis.getProduct(record.key());
                         JSONObject body = handleVariant(record.key(), record.value());
                         System.out.println(body);
-                        try (CloseableHttpAsyncClient httpclient = HttpAsyncClients.custom().setDefaultCredentialsProvider(creds).build()) {
+                        try (CloseableHttpAsyncClient httpclient = HttpAsyncClients
+                                .custom()
+                                .setDefaultCredentialsProvider(creds)
+                                .build())
+                        {
                             // Start the client
                             httpclient.start();
                             // One most likely would want to use a callback for operation result
@@ -128,7 +132,11 @@ public class Main {
                     }else{
                         JSONObject body = handleProduct(record.key(), record.value());
                         System.out.println(body);
-                        try (CloseableHttpAsyncClient httpclient = HttpAsyncClients.custom().setDefaultCredentialsProvider(creds).build()) {
+                        try (CloseableHttpAsyncClient httpclient = HttpAsyncClients
+                                .custom()
+                                .setDefaultCredentialsProvider(creds)
+                                .build())
+                        {
                             // Start the client
                             httpclient.start();
                             // One most likely would want to use a callback for operation result

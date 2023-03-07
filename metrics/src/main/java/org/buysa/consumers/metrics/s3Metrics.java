@@ -1,7 +1,9 @@
 package org.buysa.consumers.metrics;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.util.Properties;
 import java.util.Random;
 
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -17,9 +19,18 @@ public class s3Metrics {
 
     private static S3Client s3;
     public String send(String key, String value) throws IOException {
+
+        Properties localproperties = new Properties();
+        try (InputStream propertiesfile = ClassLoader.getSystemResourceAsStream("local.properties");) {
+            localproperties.load(propertiesfile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
         AwsBasicCredentials awsCreds = AwsBasicCredentials.create(
-                "AKIA6AFBSQO3ZBBG4BO4",
-                "G+JEo0QIadLkG9Qy5H6xTIJlJGtIWoYT5DqQM8Lk"
+                localproperties.getProperty("AWS_ACCESS_KEY"),
+                localproperties.getProperty("AWS_ACCESS_SECRET")
         );
 
 
