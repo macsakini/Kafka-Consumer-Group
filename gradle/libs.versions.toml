@@ -1,0 +1,24 @@
+[versions]
+
+aws = "2.20.3"
+netty = "4.1.86.Final"
+kafka = "3.4.0"
+apachehttp = "5.2.1"
+json = "20220924"
+redis = "4.4.0-m1"
+slfj = "2.0.6"
+
+[libraries]
+
+aws-core = { module = "software.amazon.awssdk:protocol-core", version.ref="aws" }
+kafka = {module = "org.apache.kafka:kafka-clients", version.ref="kafka"}
+apachehttp = {module = "org.apache.httpcomponents.client5:httpclient5", version.ref="apachehttp"}
+json = {module = "org.json:json", version.ref = "json"}
+redis = {module = "redis.clients:jedis", version.ref = "redis"}
+slfj = {module = "org.slf4j:slf4j-api" , version.ref = "slfj"}
+aws-s3 = {module = "software.amazon.awssdk:s3", version.ref = "aws"}
+
+
+[bundles]
+
+runtime = ["aws-core", "kafka", "apachehttp", "json", "redis", "aws-s3"]

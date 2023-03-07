@@ -5,19 +5,14 @@ import org.apache.hc.client5.http.async.methods.SimpleHttpRequest;
 import org.apache.hc.client5.http.async.methods.SimpleHttpResponse;
 import org.apache.hc.client5.http.async.methods.SimpleRequestBuilder;
 import org.apache.hc.client5.http.auth.AuthScope;
-import org.apache.hc.client5.http.auth.Credentials;
 import org.apache.hc.client5.http.auth.CredentialsProvider;
-import org.apache.hc.client5.http.classic.methods.HttpPost;
-import org.apache.hc.client5.http.entity.UrlEncodedFormEntity;
+import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
 import org.apache.hc.client5.http.impl.async.CloseableHttpAsyncClient;
 import org.apache.hc.client5.http.impl.async.HttpAsyncClients;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.HttpClients;
+
+import org.apache.hc.client5.http.impl.auth.BasicCredentialsProvider;
 import org.apache.hc.core5.concurrent.FutureCallback;
 import org.apache.hc.core5.http.*;
-import org.apache.hc.core5.http.io.entity.EntityUtils;
-import org.apache.hc.core5.http.io.support.ClassicRequestBuilder;
-import org.apache.hc.core5.http.message.BasicNameValuePair;
 import org.apache.hc.core5.http.protocol.HttpContext;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,7 +71,12 @@ public class Main {
         properties.setProperty(SslConfigs.SSL_KEY_PASSWORD_CONFIG, localproperties.getProperty("SSL_PASSWORD"));
         properties.setProperty(SslConfigs.SSL_ENDPOINT_IDENTIFICATION_ALGORITHM_CONFIG, "");
 
-
+        AuthScope scope = new AuthScope("https://www.buysa.co.zw/wp-json/wc/v3/products/", 80);
+        BasicCredentialsProvider creds = new BasicCredentialsProvider();
+        creds.setCredentials(
+                scope, new UsernamePasswordCredentials(
+                        localproperties.getProperty("CONSUMER_KEY"), localproperties.getProperty("CONSUMER_SECRET").toCharArray())
+        );
 
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
 
@@ -90,14 +90,13 @@ public class Main {
                         String product_id = redis.getProduct(record.key());
                         JSONObject body = handleVariant(record.key(), record.value());
                         System.out.println(body);
-                        try (CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault()) {
+                        try (CloseableHttpAsyncClient httpclient = HttpAsyncClients.custom().setDefaultCredentialsProvider(creds).build()) {
                             // Start the client
                             httpclient.start();
                             // One most likely would want to use a callback for operation result
                             CountDownLatch latch = new CountDownLatch(1);
                             SimpleHttpRequest request = SimpleRequestBuilder
                                     .post("https://www.buysa.co.zw/wp-json/wc/v3/products/"+product_id+"/variations")
-                                    .setHeader(HttpHeaders.AUTHORIZATION, "Basic Y2tfMmU5OTVjNmU2Yzc2OWE3ODg1YjZjNTdmMTBmOGIwMzNlYTg0NmRiMTpjc185NmVkNzAwZTYwNmFjNTQ5ZDZkODQzMTIxY2RhOTg1NjUxOGE4OTYy")
                                     .setBody(String.valueOf(body), ContentType.APPLICATION_JSON)
                                     .build();
                             httpclient.execute(request, new FutureCallback<SimpleHttpResponse>() {
@@ -129,14 +128,13 @@ public class Main {
                     }else{
                         JSONObject body = handleProduct(record.key(), record.value());
                         System.out.println(body);
-                        try (CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault()) {
+                        try (CloseableHttpAsyncClient httpclient = HttpAsyncClients.custom().setDefaultCredentialsProvider(creds).build()) {
                             // Start the client
                             httpclient.start();
                             // One most likely would want to use a callback for operation result
                             CountDownLatch latch = new CountDownLatch(1);
                             SimpleHttpRequest request = SimpleRequestBuilder
-                                    .post("https://www.buysa.co.zw/wp-json/wc/v3/products")
-                                    .setHeader(HttpHeaders.AUTHORIZATION, "Basic Y2tfMmU5OTVjNmU2Yzc2OWE3ODg1YjZjNTdmMTBmOGIwMzNlYTg0NmRiMTpjc185NmVkNzAwZTYwNmFjNTQ5ZDZkODQzMTIxY2RhOTg1NjUxOGE4OTYy")
+                                    .post("https://www.buysa.co.zw/wp-json/wc/v3/products/")
                                     .setBody(String.valueOf(body),ContentType.APPLICATION_JSON)
                                     .build();
                             httpclient.execute(request, new FutureCallback<SimpleHttpResponse>() {
@@ -185,14 +183,18 @@ public class Main {
 //        JSONArray images = product.getJSONArray("images");
 
 
-        JSONObject attributes = new JSONObject();
-        attributes.put("id", 8);
-        attributes.put("option", "Black");
+        new JSONObject().put("id", 8).put("name", "Color").put("option", "Black");
+
+
+
+        JSONArray attr_list = new JSONArray();
+        attr_list.put(new JSONObject().put("id", 8).put("name", "Color").put("option", "Black"));
+        attr_list.put(new JSONObject().put("id", 2).put("name", "Color").put("option", "Black"));
 
         JSONObject product_fin = new JSONObject();
         product_fin.put("regular_price", Integer.toString(regular_price));
         product_fin.put("description", description);
-        product_fin.put("attributes", new JSONArray().put(attributes));
+        product_fin.put("attributes", attr_list);
 //        product_fin.put("images", images);
 //        product_fin.put("sku", Integer.toString(plid+product_id));
         return product_fin;
@@ -217,7 +219,7 @@ public class Main {
 
         JSONObject product_fin = new JSONObject();
         product_fin.put("name", name);
-        product_fin.put("type", "variable");
+        product_fin.put("type", type);
         product_fin.put("regular_price", Integer.toString(regular_price));
         product_fin.put("description", description);
 //        product_fin.put("images", images);
